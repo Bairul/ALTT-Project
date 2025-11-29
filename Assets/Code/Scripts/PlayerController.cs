@@ -1,24 +1,52 @@
 using UnityEngine;
+using UnityEngine.InputSystem; // New Input System
 
-public class PlayerController : AEntity {
-    Rigidbody2D rgbd2d;
-    private Vector2 mvt;
-    public int movementSpeed = 1;
+[RequireComponent(typeof(Rigidbody2D))]
+public class PlayerController : MonoBehaviour
+{
+    [Header("Movement Settings")]
+    public float moveSpeed = 5f;           // Max speed
+    public float acceleration = 12f;       // How fast you reach max speed
+    public float deceleration = 12f;       // How fast you stop
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private Rigidbody2D rb;
+    private Vector2 moveInput;
+    private Vector2 currentVelocity;
+
+    private void Awake()
     {
-        rgbd2d = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    public override void Move() {
-        mvt.x = Input.GetAxisRaw("Horizontal");
-        mvt.y = Input.GetAxisRaw("Vertical");
-        rgbd2d.linearVelocity = mvt.normalized * movementSpeed;
+    // Input System callback
+    public void OnMove(InputValue value)
+    {
+        moveInput = value.Get<Vector2>();
     }
 
-    // Update is called once per frame
-    void Update() {
-        Move();
+    private void FixedUpdate()
+    {
+        Vector2 targetVelocity = moveInput.normalized * moveSpeed;
+
+        // Accelerate or decelerate depending on input
+        if (moveInput.sqrMagnitude > 0.01f)
+        {
+            currentVelocity = Vector2.Lerp(
+                currentVelocity,
+                targetVelocity,
+                acceleration * Time.fixedDeltaTime
+            );
+        }
+        else
+        {
+            // Smooth stopping
+            currentVelocity = Vector2.Lerp(
+                currentVelocity,
+                Vector2.zero,
+                deceleration * Time.fixedDeltaTime
+            );
+        }
+
+        rb.linearVelocity = currentVelocity;
     }
 }
