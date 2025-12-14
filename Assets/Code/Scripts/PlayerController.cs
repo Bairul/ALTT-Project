@@ -1,52 +1,55 @@
 using UnityEngine;
 using UnityEngine.InputSystem; // New Input System
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2DMovement))]
+[RequireComponent(typeof(HealthController))]
+
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement Settings")]
-    public float moveSpeed = 5f;           // Max speed
-    public float acceleration = 12f;       // How fast you reach max speed
-    public float deceleration = 12f;       // How fast you stop
+    public PlayerControls playerControls;
+    private InputAction move;
+    private InputAction fire;
+    
+    Rigidbody2DMovement movementComponent;
+    Vector2 moveDirection;
 
-    private Rigidbody2D rb;
-    private Vector2 moveInput;
-    private Vector2 currentVelocity;
+    HealthController healthController;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        movementComponent = GetComponent<Rigidbody2DMovement>();
+        healthController = GetComponent<HealthController>();
+        playerControls = new PlayerControls();
     }
 
-    // Input System callback
-    public void OnMove(InputValue value)
+    private void OnEnable()
     {
-        moveInput = value.Get<Vector2>();
+        move = playerControls.Player.Move;
+        move.Enable();
+
+        fire = playerControls.Player.Fire;
+        fire.Enable();
+        fire.performed += FireTriggered;
     }
 
-    private void FixedUpdate()
+    private void OnDisable()
     {
-        Vector2 targetVelocity = moveInput.normalized * moveSpeed;
+        move.Disable();
+        fire.Disable();
+    }
 
-        // Accelerate or decelerate depending on input
-        if (moveInput.sqrMagnitude > 0.01f)
-        {
-            currentVelocity = Vector2.Lerp(
-                currentVelocity,
-                targetVelocity,
-                acceleration * Time.fixedDeltaTime
-            );
-        }
-        else
-        {
-            // Smooth stopping
-            currentVelocity = Vector2.Lerp(
-                currentVelocity,
-                Vector2.zero,
-                deceleration * Time.fixedDeltaTime
-            );
-        }
+    public void Update()
+    {
+        moveDirection = move.ReadValue<Vector2>();
+    }
 
-        rb.linearVelocity = currentVelocity;
+    public void FixedUpdate()
+    {
+        movementComponent.Move(moveDirection);
+    }
+
+    private void FireTriggered(InputAction.CallbackContext context)
+    {
+        healthController.TakeDamage(1);     // TESTING: every time you left click, health decreases by 1
     }
 }
