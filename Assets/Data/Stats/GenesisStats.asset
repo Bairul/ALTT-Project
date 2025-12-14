@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 050df78deae700d438045cc3e89ac90e, type: 3}
   m_Name: GenesisStats
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  maxHP: 100
-  moveSpeed: 3
+  maxHP: 5
+  moveSpeed: 5
