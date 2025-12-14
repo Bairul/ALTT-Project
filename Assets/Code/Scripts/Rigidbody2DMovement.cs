@@ -8,6 +8,7 @@ public class Rigidbody2DMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.freezeRotation = true;
     }
 
     public void Move(Vector2 direction)

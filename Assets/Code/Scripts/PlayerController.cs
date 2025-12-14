@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem; // New Input System
 
@@ -8,7 +9,6 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerControls playerControls;
     private InputAction move;
-    private InputAction fire;
     
     Rigidbody2DMovement movementComponent;
     Vector2 moveDirection;
@@ -26,16 +26,11 @@ public class PlayerController : MonoBehaviour
     {
         move = playerControls.Player.Move;
         move.Enable();
-
-        fire = playerControls.Player.Fire;
-        fire.Enable();
-        fire.performed += FireTriggered;
     }
 
     private void OnDisable()
     {
         move.Disable();
-        fire.Disable();
     }
 
     public void Update()
@@ -48,8 +43,12 @@ public class PlayerController : MonoBehaviour
         movementComponent.Move(moveDirection);
     }
 
-    private void FireTriggered(InputAction.CallbackContext context)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        healthController.TakeDamage(1);     // TESTING: every time you left click, health decreases by 1
+        if (collision.gameObject.tag == "Enemy")
+        {
+            EnemyAttackController attack = collision.gameObject.GetComponent<EnemyAttackController>();
+            healthController.TakeDamage(attack.DealDamage());
+        }
     }
 }
