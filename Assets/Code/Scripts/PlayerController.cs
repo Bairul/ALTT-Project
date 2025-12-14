@@ -4,49 +4,36 @@ using UnityEngine.InputSystem; // New Input System
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement Settings")]
-    public float moveSpeed = 5f;           // Max speed
-    public float acceleration = 12f;       // How fast you reach max speed
-    public float deceleration = 12f;       // How fast you stop
-
-    private Rigidbody2D rb;
-    private Vector2 moveInput;
-    private Vector2 currentVelocity;
+    public PlayerControls playerControls;
+    private InputAction move;
+    
+    Rigidbody2DMovement movementComponent;
+    Vector2 moveDirection;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        movementComponent = GetComponent<Rigidbody2DMovement>();
+        playerControls = new PlayerControls();
     }
 
-    // Input System callback
-    public void OnMove(InputValue value)
+    private void OnEnable()
     {
-        moveInput = value.Get<Vector2>();
+        move = playerControls.Player.Move;
+        move.Enable();
     }
 
-    private void FixedUpdate()
+    private void OnDisable()
     {
-        Vector2 targetVelocity = moveInput.normalized * moveSpeed;
+        move.Disable();
+    }
 
-        // Accelerate or decelerate depending on input
-        if (moveInput.sqrMagnitude > 0.01f)
-        {
-            currentVelocity = Vector2.Lerp(
-                currentVelocity,
-                targetVelocity,
-                acceleration * Time.fixedDeltaTime
-            );
-        }
-        else
-        {
-            // Smooth stopping
-            currentVelocity = Vector2.Lerp(
-                currentVelocity,
-                Vector2.zero,
-                deceleration * Time.fixedDeltaTime
-            );
-        }
+    public void Update()
+    {
+        moveDirection = move.ReadValue<Vector2>();
+    }
 
-        rb.linearVelocity = currentVelocity;
+    public void FixedUpdate()
+    {
+        movementComponent.Move(moveDirection);
     }
 }
