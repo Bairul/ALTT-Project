@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerControls playerControls;
     private InputAction move;
+    private InputAction fire;
     
     Rigidbody2DMovement movementComponent;
     Vector2 moveDirection;
@@ -26,16 +27,28 @@ public class PlayerController : MonoBehaviour
     {
         move = playerControls.Player.Move;
         move.Enable();
+
+        fire = playerControls.Player.Fire;
+        fire.performed += FireTriggered;
+        fire.Enable();
     }
 
     private void OnDisable()
     {
         move.Disable();
+        fire.Disable();
     }
 
     public void Update()
     {
         moveDirection = move.ReadValue<Vector2>();
+    }
+
+    private void FireTriggered(InputAction.CallbackContext context)
+    {
+        ExperienceController experienceController = GetComponent<ExperienceController>();
+        experienceController.AddExperience(3);
+        Debug.Log("Add 3 xp");
     }
 
     public void FixedUpdate()
