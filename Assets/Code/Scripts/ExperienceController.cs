@@ -1,12 +1,12 @@
 using UnityEngine;
 
-[RequireComponent(typeof(LevelController))]
+[RequireComponent(typeof(PlayerLevelController))]
 public class ExperienceController : MonoBehaviour
 {
     [Header("Experience Data")]
     [SerializeField] private int currentExperience = 0;
     [SerializeField] private int experienceToNextLevel;
-    private LevelController levelController;
+    private PlayerLevelController levelController;
 
     [Header("Linear Scaling")]
     public int baseExperience = 10;
@@ -14,7 +14,7 @@ public class ExperienceController : MonoBehaviour
 
     void Awake()
     {
-        levelController = GetComponent<LevelController>();
+        levelController = GetComponent<PlayerLevelController>();
     }
 
     void Start()

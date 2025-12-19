@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Rigidbody2DMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;

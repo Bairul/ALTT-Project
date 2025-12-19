@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LevelController : MonoBehaviour
+public class PlayerLevelController : MonoBehaviour
 {
     public int currentLevel = 0;
     public int maxLevel = 10;

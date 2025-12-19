@@ -107,9 +107,10 @@ GameObject:
   - component: {fileID: 2942540648573993556}
   - component: {fileID: 222000275356327679}
   - component: {fileID: 4212332392553015089}
+  - component: {fileID: 3912865838810487345}
   m_Layer: 0
   m_Name: Genesis_Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160,7 +161,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -289,6 +290,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExperienceController
   currentExperience: 0
   experienceToNextLevel: 0
-  levelController: {fileID: 0}
   baseExperience: 10
   experienceIncrement: 5
+--- !u!114 &3912865838810487345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6935647034050871700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d164b698932c64eb908f19822cea95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMagnetController
+  magnetRange: 5
