@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 6800303352378822049}
   - component: {fileID: 3690582447941709130}
   - component: {fileID: 2942540648573993556}
+  - component: {fileID: -8243959214887388385}
   m_Layer: 0
   m_Name: Genesis_Player
   m_TagString: Untagged
@@ -259,3 +260,19 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &-8243959214887388385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6935647034050871700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d176e418f210d3a499c0c7df982d9846, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerShooter
+  projectilePrefab: {fileID: 5829033952037775299, guid: 756c05d12b2ba1640829fe31229373ee, type: 3}
+  target: {fileID: 3368273688250024862, guid: 19c87c37753bf1d4a8c38ca5537ca909, type: 3}
+  projectileMoveSpeed: 10
+  shootRate: 1
