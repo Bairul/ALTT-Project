@@ -100,6 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3424831334951955173}
   - component: {fileID: -174524041234048744}
+  - component: {fileID: -6880606273768607769}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -136,6 +137,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a043118ffee3740823e5a239c9f2b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileController
+  projectileVisual: {fileID: -6880606273768607769}
+--- !u!114 &-6880606273768607769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5829033952037775299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6745675a5f7fc444a81ae55c9420f81c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileVisuals
+  projectileVisual: {fileID: 102280317417761700}
+  projectileShadow: {fileID: 536401857758764396}
+  projectile: {fileID: -174524041234048744}
 --- !u!1 &6851929851973485237
 GameObject:
   m_ObjectHideFlags: 0
