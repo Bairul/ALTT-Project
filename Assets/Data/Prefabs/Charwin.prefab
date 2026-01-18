@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8243959214887388385, guid: af60526566917eb49a0b0e5493499edc, type: 3}
+      propertyPath: projectileMaxHeight
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 730390967776517498, guid: af60526566917eb49a0b0e5493499edc, type: 3}
       propertyPath: m_Sprite
       value: 
