@@ -9,9 +9,9 @@ public class ProjectileController : MonoBehaviour
     private float maxMoveSpeed;
     private float destoryProjectileDistance = 0.5f;
 
-    private AnimationCurve trajectoryAnimationCurve;
-    private AnimationCurve axisCorrectionAnimationCurve;
-    private AnimationCurve projectileSpeedAnimationCurve;
+    [SerializeField] private AnimationCurve trajectoryAnimationCurve;
+    [SerializeField] private AnimationCurve axisCorrectionAnimationCurve;
+    [SerializeField] private AnimationCurve projectileSpeedAnimationCurve;
 
     private float nextXTrajectoryPosition;
     private float nextPositionXCorrection;
@@ -120,13 +120,6 @@ public class ProjectileController : MonoBehaviour
         trajectoryMaxRelativeHeight = Math.Abs(xDistanceToTarget) * trajectoryMaxHeight;
 
         projectileVisual.SetTarget(target);
-    }
-
-    public void InitializeAnimationCurves(AnimationCurve trajectoryAnimationCurve, AnimationCurve axisCorrectionAnimationCurve, AnimationCurve projectileSpeedAnimationCurve)
-    {
-        this.trajectoryAnimationCurve = trajectoryAnimationCurve;
-        this.axisCorrectionAnimationCurve = axisCorrectionAnimationCurve;
-        this.projectileSpeedAnimationCurve = projectileSpeedAnimationCurve; 
     }
 
     public Vector3 GetProjectileMoveDir()
